@@ -36,7 +36,7 @@ RUN apt-get update && apt-get install -y curl ca-certificates && rm -rf /var/lib
 
 # Teleport 바이너리 다운로드
 RUN curl -sSL https://cdn.teleport.dev/teleport-v13.3.4-linux-amd64-bin.tar.gz | tar -xz && \
-    mv teleport/install/teleport /usr/local/bin/ && \
+    mv teleport/teleport /usr/local/bin/teleport && \
     chmod +x /usr/local/bin/teleport
 
 # Teleport 설정 복사
