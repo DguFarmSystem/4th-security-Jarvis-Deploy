@@ -24,9 +24,6 @@ WORKDIR /app/4th-security-Jarvis-BE
 RUN go mod download
 RUN go build -o backend ./main.go
 
-COPY entrypoint.sh /entrypoint.sh
-RUN chmod +x /entrypoint.sh
-
 # 3단계: serve 설치용 임시 스테이지
 FROM node:18 AS serve-installer
 RUN npm install -g serve
