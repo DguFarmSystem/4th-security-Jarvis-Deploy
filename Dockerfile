@@ -13,7 +13,7 @@ FROM node:18 AS serve-installer
 RUN npm install -g serve
 
 # 2단계: 백엔드 빌드
-FROM golang:1.25-alpine AS builder
+FROM golang:1.25-alpine AS be-builder
 
 WORKDIR /app
 ENV CGO_ENABLED=0 GOOS=linux
