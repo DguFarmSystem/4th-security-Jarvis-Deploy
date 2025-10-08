@@ -8,10 +8,6 @@ WORKDIR /app/4th-security-Jarvis-FE
 RUN npm install --legacy-peer-deps
 RUN npm run build
 
-# serve 설치 (단독 스테이지)
-FROM node:18 AS serve-installer
-RUN npm install -g serve
-
 # 2단계: 백엔드 빌드
 FROM golang:1.25-alpine AS be-builder
 
