@@ -23,6 +23,10 @@ RUN go build -o backend ./main.go
 # 3단계: 최종 실행 이미지
 FROM debian:bullseye-slim
 
+# 빌드 아규먼트로 아키텍처 받기
+ARG TARGETPLATFORM
+ARG TARGETARCH
+
 # Node.js + 필수 패키지 설치
 RUN apt-get update && apt-get install -y curl ca-certificates gnupg && \
     curl -fsSL https://deb.nodesource.com/setup_18.x | bash - && \
@@ -30,10 +34,18 @@ RUN apt-get update && apt-get install -y curl ca-certificates gnupg && \
     npm install -g serve && \
     rm -rf /var/lib/apt/lists/*
 
-# Teleport 바이너리 다운로드
-RUN curl -sSL https://cdn.teleport.dev/teleport-v13.3.4-linux-amd64-bin.tar.gz | tar -xz && \
-    mv teleport/teleport /usr/local/bin/teleport && \
-    chmod +x /usr/local/bin/teleport
+# 아키텍처별 텔레포트 바이너리 다운로드
+RUN echo "Target platform: $TARGETPLATFORM, Target arch: $TARGETARCH" && \
+    case "$TARGETARCH" in \
+    amd64) TELEPORT_ARCH="linux-amd64" ;; \
+    arm64) TELEPORT_ARCH="linux-arm64" ;; \
+    *) echo "Unsupported architecture: $TARGETARCH" && exit 1 ;; \
+    esac && \
+    echo "Downloading Teleport for: $TELEPORT_ARCH" && \
+    curl -sSL https://cdn.teleport.dev/teleport-v18.2.1-${TELEPORT_ARCH}-bin.tar.gz | tar -xz && \
+    find teleport -type f -executable -exec cp {} /usr/local/bin/ \; && \
+    chmod +x /usr/local/bin/teleport /usr/local/bin/tctl /usr/local/bin/tsh && \
+    rm -rf teleport/
 
 # Teleport 설정 복사
 COPY teleport.yaml /etc/teleport/teleport.yaml
@@ -49,7 +61,7 @@ EXPOSE 3000 8080 3025
 
 # ENTRYPOINT: 모든 서비스 실행
 ENTRYPOINT sh -c "\
-  teleport start --config=/etc/teleport/teleport.yaml & \
-  sleep 5 && \
-  /usr/local/bin/backend & \
-  serve -s /app/frontend -l 3000"
+    teleport start --config=/etc/teleport/teleport.yaml & \
+    sleep 5 && \
+    /usr/local/bin/backend & \
+    serve -s /app/frontend -l 3000"
