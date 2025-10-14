@@ -12,7 +12,7 @@ teleport:
 auth_service:
   enabled: "yes"
   listen_addr: 0.0.0.0:3025
-  session_recording: "proxy"
+  session_recording: "node"
   proxy_listener_mode: multiplex
   public_addr:
     - "localhost:3025"
