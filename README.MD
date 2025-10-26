@@ -3,7 +3,7 @@
 로컬에서 클론하여 이미지를 빌드해 사용하는 방법
 
 #### git submodule update --init --remote
-#### docker build -t teleport-web .
+#### docker buildx build --platform linux/amd64,linux/arm64 -t clapppp/teleport-web:latest --push .
 #### docker run -d -p 3000:3000 -p 8080:8080 --name=teleport-web teleport-web
 
 -------
