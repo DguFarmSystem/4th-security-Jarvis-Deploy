@@ -12,9 +12,9 @@ RUN npm run build
 FROM golang:1.25-alpine AS be-builder
 
 WORKDIR /app
-ENV CGO_ENABLED=0 GOOS=linux
+ARG TARGETARCH
+ENV CGO_ENABLED=0 GOOS=linux GOARCH=$TARGETARCH
 
-# 소스 복사 및 빌드
 COPY 4th-security-Jarvis-BE ./4th-security-Jarvis-BE
 WORKDIR /app/4th-security-Jarvis-BE
 RUN go mod download
