@@ -11,5 +11,4 @@
 도커 허브 이미지를 받아와 사용하는 방법
 
 #### docker pull clapppp/teleport-web:latest
-
 #### docker run --rm -d -p 3000:3000 -p 8080:8080 clapppp/teleport-web:latest
