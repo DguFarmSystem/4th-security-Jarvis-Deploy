@@ -13,6 +13,7 @@ The goal was to decouple the user experience from Teleport's native UI, enabling
 
 ## Architecture
 <img width="391" height="214" alt="Image" src="https://github.com/user-attachments/assets/115e028b-77eb-47df-9bfa-64882a684e98" />  
+  
 - A **single-container architecture** was chosen to simplify deployment and reduce networking complexity.
 - The backend was developed in **Go** to take advantage of Teleport’s **Go API**, which provides the broadest range of supported functionality.
 - Some parts of the backend communicate with Teleport through **CLI commands**. Because Teleport does not expose a public login API, I automated the CLI-based login process and exposed it through the backend as an API.
