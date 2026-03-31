@@ -31,4 +31,5 @@ cd 4th-security-Jarvis-Deploy
 docker build -t jarvis .
 docker run -d --name jarvis -p 3000:3000 -p 8080:8080 jarvis
 ```
-You can access the application at `http://localhost:3000` and log in with the default credentials
+You can access the application at `http://localhost:3000` and log in with the default credentials.  
+ID:admin , PW:admin
