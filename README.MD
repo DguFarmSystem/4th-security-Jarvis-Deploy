@@ -3,17 +3,20 @@ This project is a **web-based SSH access platform** built on top of [Teleport](h
 The goal was to decouple the user experience from Teleport's native UI, enabling **localization (Korean support)** and **custom workflows** while leveraging Teleport's robust security features.
 
 ## Screenshots
+<img width="500" height="320" alt="Image" src="https://github.com/user-attachments/assets/103bc843-3541-4058-beb4-42265aacdd7b" />
+<img width="500" height="320" alt="Image" src="https://github.com/user-attachments/assets/2b677e67-d754-4b85-b040-e635f851063d" />
+<img width="500" height="320" alt="Image" src="https://github.com/user-attachments/assets/7bf67ef2-5748-475c-bd1c-9e8f198c3d58" />
 <img width="500" height="320" alt="Image" src="https://github.com/user-attachments/assets/9010fea4-c9d3-41f2-b4f1-f75f2866dc01" />
 <img width="500" height="320" alt="Image" src="https://github.com/user-attachments/assets/888f9b19-16db-447e-b61f-0e2601c9594b" />
-<img width="500" height="320" alt="Image" src="https://github.com/user-attachments/assets/cc1d954d-27ce-4650-b58c-e08aa97a230e" />
 <img width="500" height="320" alt="Image" src="https://github.com/user-attachments/assets/ca939c22-2713-4350-8088-cc3e0bfb3afb" />
 <img width="500" height="320" alt="Image" src="https://github.com/user-attachments/assets/67474dae-6fea-47c5-91a1-b11ae668dc78" />
-<img width="500" height="320" alt="Image" src="https://github.com/user-attachments/assets/7bf67ef2-5748-475c-bd1c-9e8f198c3d58" />
-<img width="500" height="320" alt="Image" src="https://github.com/user-attachments/assets/2b677e67-d754-4b85-b040-e635f851063d" />
-<img width="500" height="320" alt="Image" src="https://github.com/user-attachments/assets/103bc843-3541-4058-beb4-42265aacdd7b" />
 
 ## Architecture
-
+<img width="391" height="214" alt="Image" src="https://github.com/user-attachments/assets/115e028b-77eb-47df-9bfa-64882a684e98" />
+- A **single-container architecture** was chosen to simplify deployment and reduce networking complexity.
+- The backend was developed in **Go** to take advantage of Teleport’s **Go API**, which provides the broadest range of supported functionality.
+- Some parts of the backend communicate with Teleport through **CLI commands**. Because Teleport does not expose a public login API, I automated the CLI-based login process and exposed it through the backend as an API.
+- Teleport’s **gRPC-based API**, which is accessed through its **Go client**, supports most features other than login, enabling the backend to serve as a gateway between the custom application and Teleport.
 
 ## Learnings
 - Built practical experience with **Docker** and **Docker Compose**, including container networking and image deployment through **Docker Hub**.
@@ -25,6 +28,6 @@ The goal was to decouple the user experience from Teleport's native UI, enabling
 git clone --recurse-submodules https://github.com/DguFarmSystem/4th-security-Jarvis-Deploy.git
 cd 4th-security-Jarvis-Deploy
 docker build -t jarvis .
-docker run -d --name jarvis -p 3000:3000 -p 8080:8080 -p 3025:3025 jarvis
+docker run -d --name jarvis -p 3000:3000 -p 8080:8080 jarvis
 ```
 You can access the application at http://localhost:3000 and log in with the default credentials
