@@ -1,4 +1,3 @@
-
 ## Overview
 
 This project is a **web-based SSH access platform** built on top of [Teleport](https://goteleport.com/). It was developed for an Open Source Developer Challenge to provide a **customizable, user-friendly web interface** that overcomes the limitations of Teleport's built-in web UI.
@@ -6,21 +5,7 @@ The goal was to decouple the user experience from Teleport's native UI, enabling
 
 ## Screenshots
 
-<img src="./images/JARVIS_screenshot1.png" alt="Screenshot1" width="580" />
-
-<img src="./images/JARVIS_screenshot2.png" alt="Screenshot2" width="580" />
-
-<img src="./images/JARVIS_screenshot3.png" alt="Screenshot3" width="580" />
-
-<img src="./images/JARVIS_screenshot4.png" alt="Screenshot4" width="580" />
-
-<img src="./images/JARVIS_screenshot5.png" alt="Screenshot5" width="580" />
-
-
-<img src="./images/JARVIS_screenshot6.png" alt="Screenshot6" width="580" />
-
-<img src="./images/JARVIS_screenshot7.png" alt="Screenshot7" width="580" />
-
+<img src="./images/JARVIS_screengif.gif" alt="screengif" width="480" />
 
 ## Architecture
 
